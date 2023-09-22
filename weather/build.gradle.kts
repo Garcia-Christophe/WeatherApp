@@ -4,6 +4,8 @@ plugins {
     id("io.spring.dependency-management") version "1.1.3"
 }
 
+apply("gradle/swagger.gradle.kts")
+
 group = "com.m2.tiila"
 version = "0.0.1-SNAPSHOT"
 

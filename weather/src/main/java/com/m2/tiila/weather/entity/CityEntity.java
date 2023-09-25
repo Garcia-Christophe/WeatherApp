@@ -1,6 +1,5 @@
 package com.m2.tiila.weather.entity;
 
-
 import lombok.Data;
 
 @Data

@@ -1,5 +1,5 @@
 CREATE TABLE City (
-    id VARCHAR(22) PRIMARY KEY,
+    id VARCHAR(22),
     name VARCHAR(22),
     postCode NUMBER(5),
     region VARCHAR(22),

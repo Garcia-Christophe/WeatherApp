@@ -39,3 +39,8 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.bootRun {
+    val port: String by project
+    jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=2${port}", "-Dserver.port=${port}")
+}

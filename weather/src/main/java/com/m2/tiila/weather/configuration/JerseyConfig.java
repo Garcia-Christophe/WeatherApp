@@ -9,5 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class JerseyConfig extends ResourceConfig {
   public JerseyConfig() {
     packages("com.m2.tiila.weather.controller");
+    packages("com.m2.tiila.weather.filter");
   }
 }

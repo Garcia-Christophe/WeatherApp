@@ -1,8 +1,8 @@
 package com.m2.tiila.weather.repository;
 
-import com.m2.tiila.weather.dto.City;
 import com.m2.tiila.weather.entity.CityEntity;
 import com.m2.tiila.weather.mapper.CityMapper;
+import dto.weatherapi.City;
 import jakarta.inject.Inject;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

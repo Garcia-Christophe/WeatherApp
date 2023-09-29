@@ -1,7 +1,7 @@
 package com.m2.tiila.weather.controller;
 
 import com.m2.tiila.weather.business.CityBusiness;
-import com.m2.tiila.weather.dto.City;
+import dto.weatherapi.City;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

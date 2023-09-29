@@ -1,7 +1,7 @@
 package com.m2.tiila.weather.mapper;
 
-import com.m2.tiila.weather.dto.City;
 import com.m2.tiila.weather.entity.CityEntity;
+import dto.weatherapi.City;
 
 public class CityMapper {
 

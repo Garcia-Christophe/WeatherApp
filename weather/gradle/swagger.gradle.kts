@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath("io.swagger.codegen.v3:swagger-codegen-generators:1.0.31")
     }
-    project.the<SourceSetContainer>()["main"].java.srcDir("$buildDir/swagger/src/dto")
+    project.the<SourceSetContainer>()["main"].java.srcDir("$buildDir/swagger/src/gen/java")
     tasks.named("compileJava") {
         dependsOn(":generateSwagger")
     }
@@ -18,11 +18,14 @@ apply(plugin = "java-library")
 
 dependencies {
     // Swagger.
-    "implementation"("io.swagger.core.v3:swagger-annotations:2.2.0")
-    "implementation"("io.swagger.core.v3:swagger-jaxrs2:2.2.0")
+    "implementation"("io.swagger.core.v3:swagger-annotations-jakarta:2.2.16")
+    "implementation"("jakarta.annotation:jakarta.annotation-api:2.1.1")
+    "implementation"("javax.validation:validation-api:2.0.1.Final")
+    "implementation"("javax.annotation:javax.annotation-api:1.3.2")
 }
 
 task("generateSwagger") {
+ //val sourceSets = project.extensions.getByType(org.gradle.api.tasks.SourceSetContainer::class.java)
     val swaggerDir = "src/main/resources/swagger"
     val swaggerOutputDir = "$buildDir/swagger"
     inputs.dir(swaggerDir)
@@ -66,5 +69,9 @@ task("generateSwagger") {
         delete(fileTree(swaggerOutputDir).matching {
             include("**/InlineResponse*")
         })
+        /*sourceSets.getByName("main").java.srcDirs(
+            "build/swagger/src/gen/java"
+        )*/
     }
+
 }

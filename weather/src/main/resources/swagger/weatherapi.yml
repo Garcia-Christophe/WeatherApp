@@ -188,11 +188,11 @@ components:
       x-stoplight:
         id: ybhwotop6365d
       enum:
-        - NUAGEUX
-        - PLUVIEUX
-        - NEIGEUX
-        - VENTEUX
-        - ENSOLEILLE
+        - CLOUDS
+        - RAIN
+        - SNOW
+        - WIND
+        - SUN
     Error:
       title: Error
       x-stoplight:

@@ -1,0 +1,13 @@
+image: gradle:7.3.3-jdk17-alpine
+
+stages:
+  - test
+
+test:
+  stage: test
+  allow_failure: false
+  script:
+    - echo 'Running unit tests'
+    - cd weather
+    - chmod +x ./gradlew
+    - ./gradlew check

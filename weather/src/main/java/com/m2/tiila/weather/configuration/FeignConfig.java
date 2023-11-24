@@ -12,10 +12,12 @@ import feign.okhttp.OkHttpClient;
 import jakarta.inject.Inject;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.concurrent.TimeUnit;
 
 @Configuration
+@Profile("!TEST")
 public class FeignConfig {
 
   @Inject
@@ -25,7 +27,7 @@ public class FeignConfig {
   private ObjectMapper objectMapper;
 
   @Bean
-  OpenWeatherClient getOpenWeatherClient() {
+  public OpenWeatherClient getOpenWeatherClient() {
     return Feign.builder()
         .encoder(new JacksonEncoder(objectMapper))
         .decoder(new JacksonDecoder(objectMapper))

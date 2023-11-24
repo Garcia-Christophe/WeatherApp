@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS CITY;
+
 CREATE TABLE City (
     id VARCHAR(22),
     name VARCHAR(22),

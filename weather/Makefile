@@ -6,3 +6,6 @@ build:
 
 run:
 	./gradlew bootRun
+
+test:
+	./gradlew check

@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.4"
     id("io.spring.dependency-management") version "1.1.3"
+    jacoco
 }
 
 apply("gradle/swagger.gradle.kts")
@@ -11,6 +12,10 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
+}
+
+jacoco {
+    toolVersion = "0.8.9"
 }
 
 configurations {
@@ -52,10 +57,34 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.github.openfeign:feign-mock")
+    testImplementation("io.rest-assured:rest-assured:5.3.2")
+    testImplementation("io.rest-assured:json-path:5.3.2")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
+    finalizedBy("jacocoTestReport")
+}
+tasks.check {
+    finalizedBy(":jacocoTestReport")
+}
+tasks.jacocoTestReport {
+    dependsOn("test")
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.outputLocation.set(file("${buildDir}/jacocoHtml"))
+    }
+    dependsOn(tasks.test)
+}
+tasks.test {
+    reports.junitXml.required.set(true)
+    reports.html.required.set(true)
+    jvmArgs("-Denv=TEST")
+    useJUnitPlatform()
+    outputs.dir(file("${buildDir}/generated-snippets"))
+    finalizedBy(":jacocoTestReport")
 }
 
 tasks.bootRun {

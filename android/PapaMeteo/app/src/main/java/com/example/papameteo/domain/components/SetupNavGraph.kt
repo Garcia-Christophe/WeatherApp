@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.papameteo.domain.view.SplashScreen
 import com.example.papameteo.domain.view.WeatherDetailsListScreen
 import com.example.papameteo.domain.view.WeatherSearchScreen
 
@@ -17,8 +18,15 @@ import com.example.papameteo.domain.view.WeatherSearchScreen
 fun SetupNavGraph(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.WeatherSearch.route
+        startDestination = Screen.SplashScreen.route
     ) {
+        composable(
+            route = Screen.SplashScreen.route
+        ) {
+            SplashScreen(
+                navHostController = navHostController
+            )
+        }
         composable(
             route = Screen.WeatherSearch.route
         ) {
@@ -39,6 +47,7 @@ fun SetupNavGraph(navHostController: NavHostController) {
 }
 
 sealed class Screen(val route: String) {
+    object SplashScreen : Screen("SplashScreen")
     object WeatherSearch : Screen("WeatherSearch")
     object WeatherList : Screen("WeatherList")
 }

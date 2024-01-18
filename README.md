@@ -13,6 +13,6 @@ Utilisation de : Koin, Ktor, Navigation, Location, Map, Lottie, Datastore.
 ### Screens
 
 ![SplashScreen](./android/assets/SplashScreen.png)
-![Accueil](./android/assets/Accueil.png)
+![Accueil](./android/assets/Accueil.png) \
 ![Recherche](./android/assets/Recherche.png)
 ![ListeResultats](./android/assets/ListeResultats.png)

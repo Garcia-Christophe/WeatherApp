@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.papameteo.data.core.Status
 import com.example.papameteo.data.repository.WeatherRepositoryInterface
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -31,7 +32,7 @@ open class WeatherViewModel(private val repository: WeatherRepositoryInterface) 
     private fun fetchWeather(city: String) = fetchWithFlow(city)
 
     private fun fetchWithFlow(city: String? = null, location: Location? = null) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val flow = if (city != null) {
                 repository.fetchWeather(city = city)
             } else {

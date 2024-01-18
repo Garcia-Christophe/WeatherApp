@@ -12,6 +12,7 @@ import com.example.papameteo.domain.model.UserPreferencesRepositoryImpl
 import com.example.papameteo.domain.model.UserPreferencesRepositoryInterface
 import com.example.papameteo.domain.model.WeatherDetailsViewModel
 import com.example.papameteo.domain.model.WeatherViewModel
+import com.example.papameteo.other.WeatherRoomDb
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import io.ktor.client.HttpClient
@@ -35,6 +36,8 @@ private inline val requireApplication
 
 private val Context.dataStore by preferencesDataStore(name = "user_preferences")
 
+val database by lazy { WeatherRoomDb.getDatabase(requireApplication) }
+
 val appModule = module {
     single<String>(named("weather_api_key")) { "888f70e84a4d7e44f3c0d4870c926e9d" }
     viewModel { WeatherViewModel(repository = get()) }
@@ -43,6 +46,7 @@ val appModule = module {
     viewModel { LocationViewModel(client =  get()) }
     single<UserPreferencesRepositoryInterface> { UserPreferencesRepositoryImpl(requireApplication.dataStore) }
     viewModel { FavViewModel(userPreferences = get()) }
+    single<WeatherRepositoryInterface> { WeatherRepository(get(), database.weatherDao()) }
 }
 
 val commonModule = module {
@@ -50,7 +54,7 @@ val commonModule = module {
     single { createJson() }
     single { createHttpClient(get(), get(), enableNetworkLogs = true) }
     single { CoroutineScope(Dispatchers.Default + SupervisorJob()) }
-    single<WeatherRepositoryInterface> { WeatherRepository(get()) }
+    single<WeatherRepositoryInterface> { WeatherRepository(get(), database.weatherDao()) }
     single { OpenWeatherApi(get(), get(named("weather_api_key"))) }
 }
 

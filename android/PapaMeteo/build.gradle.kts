@@ -3,6 +3,7 @@ buildscript {
     extra.apply{
         val ktorVersion by extra("2.3.4")
         val koinVersion by extra("3.4.0")
+        val roomVersion by extra("2.4.3")
     }
 }
 

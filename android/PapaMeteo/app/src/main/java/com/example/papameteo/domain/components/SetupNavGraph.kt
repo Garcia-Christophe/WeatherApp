@@ -47,7 +47,7 @@ fun SetupNavGraph(navHostController: NavHostController) {
 }
 
 sealed class Screen(val route: String) {
-    object SplashScreen : Screen("SplashScreen")
+    object SplashScreen : Screen("Splash")
     object WeatherSearch : Screen("WeatherSearch")
     object WeatherList : Screen("WeatherList")
 }

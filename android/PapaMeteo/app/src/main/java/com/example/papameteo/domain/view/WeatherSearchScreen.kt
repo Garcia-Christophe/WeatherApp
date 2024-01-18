@@ -39,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.papameteo.R
+import com.example.papameteo.domain.components.FavsList
 import com.example.papameteo.domain.components.Screen
 import com.example.papameteo.domain.components.WeatherDetailsItem
 import com.example.papameteo.domain.components.WeatherMap
@@ -181,6 +182,15 @@ fun WeatherSearchScreen(
                             .fillMaxWidth()
                             .padding(30.dp),
                         style = MaterialTheme.typography.bodyLarge,
+                    )
+                    FavsList(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(30.dp),
+                        selectionChange = {
+                            text = it
+                            weatherViewModel.cityChanged(text)
+                        }
                     )
                 }
             }

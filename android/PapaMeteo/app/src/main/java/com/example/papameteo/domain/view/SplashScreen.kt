@@ -30,11 +30,7 @@ fun SplashScreen(navHostController: NavHostController) {
     LaunchedEffect(key1 = progress) {
         // end of animation
         if (progress == 1f) {
-            navHostController.navigate(Screen.WeatherSearch.route) {
-                popUpTo(Screen.WeatherSearch.route) {
-                    inclusive = true
-                }
-            }
+            navHostController.navigate(Screen.WeatherSearch.route)
         }
     }
 
@@ -50,8 +46,6 @@ fun SplashScreen(navHostController: NavHostController) {
             progress = { progress }
         )
     }
-
-    /// TODO attendre la fin de l'animiation, et naviguer vers la page de recherche
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFF)

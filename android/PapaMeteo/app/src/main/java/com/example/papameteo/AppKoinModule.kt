@@ -1,10 +1,15 @@
 package com.example.papameteo
 
+import android.content.Context
 import android.util.Log
+import androidx.datastore.preferences.preferencesDataStore
 import com.example.papameteo.data.api.OpenWeatherApi
 import com.example.papameteo.data.repository.WeatherRepository
 import com.example.papameteo.data.repository.WeatherRepositoryInterface
+import com.example.papameteo.domain.model.FavViewModel
 import com.example.papameteo.domain.model.LocationViewModel
+import com.example.papameteo.domain.model.UserPreferencesRepositoryImpl
+import com.example.papameteo.domain.model.UserPreferencesRepositoryInterface
 import com.example.papameteo.domain.model.WeatherDetailsViewModel
 import com.example.papameteo.domain.model.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -28,12 +33,16 @@ import org.koin.dsl.module
 private inline val requireApplication
     get() = WeatherApplication.instance ?: error("Missing call: initWith(application)")
 
+private val Context.dataStore by preferencesDataStore(name = "user_preferences")
+
 val appModule = module {
     single<String>(named("weather_api_key")) { "888f70e84a4d7e44f3c0d4870c926e9d" }
     viewModel { WeatherViewModel(repository = get()) }
     viewModel { WeatherDetailsViewModel(repository = get()) }
     single<FusedLocationProviderClient> { LocationServices.getFusedLocationProviderClient(requireApplication.applicationContext) }
     viewModel { LocationViewModel(client =  get()) }
+    single<UserPreferencesRepositoryInterface> { UserPreferencesRepositoryImpl(requireApplication.dataStore) }
+    viewModel { FavViewModel(userPreferences = get()) }
 }
 
 val commonModule = module {

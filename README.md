@@ -8,7 +8,7 @@ Revue de l'architecture. Utilisation de plusieurs outils.
 
 Logiciel : Android Studio.
 
-Utilisation de : Koin, Ktor, Navigation, Location, Map, Lottie, Datastore.
+Utilisation de : Koin, Ktor, Navigation, Location, Map, Lottie, Datastore, Room.
 
 ### Screens
 
